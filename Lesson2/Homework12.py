@@ -9,7 +9,10 @@ while not s.isdigit() or not p.isdigit():
     p = (input("Введите P: "))
 s = int(s)
 p = int(p)
-x = p / (s - 2)
-y = s - x
+for x in range(1000):
+    for y in range(1000):
+        if x + y == s and x * y == p:
+            print(x,y)
+            # break
 
-print(x,y)
+
