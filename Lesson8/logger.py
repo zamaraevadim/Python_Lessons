@@ -114,4 +114,28 @@ def change_contact():
                 
             
 def delete_contact():
-    print()
+            print("Выберите контакт для удаления: ")
+            contact = search_contact()
+            contacts_str = read_file().rstrip()
+            contacts_str = contacts_str.split('\n\n')
+            count = 0
+            for el in contacts_str:
+                elem = el.replace('n',' ').split()
+                if contact == elem:
+                    break
+                count += 1
+            print(contact)
+            print()
+            new_contacts = []
+            for contact1 in contacts_str:
+                if not isinstance(contact1,list):
+                    contact1 = contact1.split()
+                    new_contacts.append(contact1)   
+            new_contacts.remove(contact)
+            file = open('phonebook.txt','a')
+            file.seek(0)
+            file.truncate()
+            file.close()
+            for contact1 in new_contacts:      
+                with open('phonebook.txt','a', encoding='utf-8') as data:
+                        data.write(f'{contact1[0]} {contact1[1]} {contact1[2]}\n{contact1[3]}\n{contact1[4]}' + '\n\n')
