@@ -19,7 +19,7 @@ def read_file():
 
 def print_contact():
     data = read_file()
-    print([data])
+    print(data)
 
 def search_contact():
     
@@ -43,5 +43,75 @@ def search_contact():
         for el_str in contacts_lst:
             el_lst = el_str.replace('\n',' ').split()
             if search in el_lst[choice]:
-                print(el_lst)
-                print()
+                return el_lst
+                
+
+def change_contact():
+            print("Выберите контакт для изменения: ")
+            contact = search_contact()
+            contacts_str = read_file().rstrip()
+            contacts_str = contacts_str.split('\n\n')
+            count = 0
+            for el in contacts_str:
+                elem = el.replace('n',' ').split()
+                if contact == elem:
+                    break
+                count += 1
+            print(contact)
+            print()
+            print('Выберете что хотите изменить: ')
+            cmd = None
+            while cmd != '6':
+                 print('Меню: \n'
+                '1. Имя\n'
+                '2. Фамилию\n'
+                '3. Отчество\n'
+                '4. Номер\n'
+                '5. Адрес\n'
+                '6. Выход в меню\n')
+                 cmd = input('Введите номер операции: ')
+            
+                 while cmd not in ('1','2','3','4','5','6'):
+                    print('Некорректный ввод')
+                    cmd = input('Введите номер операции: ')
+                 match cmd:
+                    case '1':
+                        
+                        new_name = input('Введите новое имя: ')
+                        contact[int(0)] = new_name
+                        contacts_str[count] = contact
+                        
+                    case '2':
+                        new_name = input('Введите новую фамилию: ')
+                        contact[int(1)] = new_name
+                        contacts_str[count] = contact
+                        
+                    case '3':
+                        new_name = input('Введите новое отчество: ')
+                        contact[int(2)] = new_name
+                        contacts_str[count] = contact
+                        
+                            
+                    case '4':
+                        new_name = input('Введите новый номер: ')
+                        contact[int(3)] = new_name
+                        contacts_str[count] = contact
+                        
+                    case '5':
+                        new_name = input('Введите новый адрес: ')
+                        contact[int(4)] = new_name
+                        contacts_str[count] = contact
+                 file = open('phonebook.txt','a')
+                 file.seek(0)
+                 file.truncate()
+                 file.close()
+                 for contact1 in contacts_str:
+                     if not isinstance(contact1,list):
+                         contact1 = contact1.split()        
+                     with open('phonebook.txt','a', encoding='utf-8') as data:
+                             data.write(f'{contact1[0]} {contact1[1]} {contact1[2]}\n{contact1[3]}\n{contact1[4]}' + '\n\n')
+                        
+                
+            
+def delete_contact():
+    print()
